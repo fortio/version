@@ -35,3 +35,14 @@ build	GOOS=darwin
 $ ~/go/bin/sample
 2023/02/12 13:34:37 fortio.org/version sample main started 1.0.0 h1:JbGoGiNQ0883KoVPDsYhQCQ32QkAVTtECn86XVRRYi4= go1.19.5 arm64 darwin
 ```
+
+Libraries can embed their own version using for instance
+```golang
+func init() { //nolint:gochecknoinits // we do need an init for this
+	shortVersion, longVersion, fullVersion = version.FromBuildInfoPath("fortio.org/fortio")
+}
+```
+
+and the `longVersion` in this example can then show both the module/library version and the version of the containing binary. eg
+
+fortio 1.40.0 h1:jSDO/jGcyC/qTpMZZ84EZbn9BQawsWM9/RMQ9s6Cn3w= go1.19.5 arm64 darwin (in fortio.org/fortiotel 1.3.0)

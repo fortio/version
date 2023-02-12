@@ -62,6 +62,8 @@ func getVersion(binfo *debug.BuildInfo, path string) (short, sum, mainPath, base
 
 // FromBuildInfoPath returns the version of as specific module if that module isn't already the main one.
 // Used by Fortio library version init to remember it's own version.
+// Can be used by any other library to extract their own running version.
+// It will also indicate the containing binary's version if the module is not the main one.
 func FromBuildInfoPath(path string) (short, long, full string) {
 	binfo, ok := debug.ReadBuildInfo()
 	if !ok {
