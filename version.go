@@ -40,12 +40,13 @@ func normalizeVersion(version string) string {
 	return short
 }
 
-func getVersion(binfo *debug.BuildInfo, path string) (short, sum, mainPath, base string) {
+func getVersion(binfo *debug.BuildInfo, path string) (short, sum, mainPath, base string, isMain bool) {
 	mainPath = binfo.Main.Path
 	base = normalizeVersion(binfo.Main.Version)
 	if path == "" || path == mainPath {
 		sum = binfo.Main.Sum
 		short = base
+		isMain = true
 		return
 	}
 	// try to find the right module in deps
@@ -71,9 +72,9 @@ func FromBuildInfoPath(path string) (short, long, full string) {
 		log.Print("Error calling debug.ReadBuildInfo() for fortio version module")
 		return
 	}
-	short, sum, mainPath, base := getVersion(binfo, path)
+	short, sum, mainPath, base, isMain := getVersion(binfo, path)
 	long = short + " " + sum + " " + binfo.GoVersion + " " + runtime.GOARCH + " " + runtime.GOOS
-	if short != base {
+	if !isMain {
 		long = long + " (in " + mainPath + " " + base + ")"
 	}
 	full = fmt.Sprintf("%s\n%v", long, binfo.String())
