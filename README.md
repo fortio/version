@@ -9,7 +9,7 @@ var shortVersion, longVersion, fullVersion := version.FromBuildInfo()
 
 Complete example in [sample/simpleMain.go](sample/simpleMain.go)
 
-See also a tiny library using this one to reduce the repition in main programs: [fortio.org/cli](https://github.com/fortio/cli#cli) package.
+See also a tiny library using this one to reduce the repetition in main programs: [fortio.org/cli](https://github.com/fortio/cli#cli) package.
 
 Yielding:
 ```shell
