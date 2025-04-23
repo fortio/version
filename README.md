@@ -1,5 +1,7 @@
 # version
-Reusable wrappers/utils to extract version(s) from golang Buildinfo included in `go install`ed binaries
+Reusable wrappers/utils to extract version(s) from golang Buildinfo included in `go install`ed binaries.
+
+Note that as of go 1.24, `go build` also embeds the same information if your git repo is clean (add the necessary entries in your .gitignore to make it so).
 
 ```golang
 import fortio.org/version
